@@ -23,7 +23,7 @@ def generate_launch_description():
     # Obtener la ruta completa del archivo YAML del mapa
     package_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    map_file_path = PythonExpression(["'",package_path, "/config","/",map_file, "'"])
+    map_file_path = PythonExpression(["'",package_path, "/maps","/",map_file, "'"])
 
 
 
