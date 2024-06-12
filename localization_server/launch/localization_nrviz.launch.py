@@ -23,7 +23,7 @@ def generate_launch_description():
     # Obtener la ruta completa del archivo YAML del mapa
     package_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    map_file_path = PythonExpression(["'",package_path, "/config","/",map_file, "'"])
+    map_file_path = PythonExpression(["'",package_path, "/maps","/",map_file, "'"])
 
 
 
@@ -57,20 +57,6 @@ def generate_launch_description():
             output='screen',
             parameters=[{'use_sim_time': True},
                         {'autostart': True},
-                        {'node_names': ['map_server','amcl']}]), 
-
-
-                #~~~~~~~~~~~~~~~~~~reiniatilize global~~~~~~~~~~~~~~~~~~~~~~~~~~
-        
-        ExecuteProcess(
-            cmd=[[
-                FindExecutable(name='ros2'),
-                " service call ",
-                "/reinitialize_global_localization ",
-                "std_srvs/srv/Empty",
-            ]],
-            shell=True
-            )
-        
+                        {'node_names': ['map_server','amcl']}])
 
         ]) 

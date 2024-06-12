@@ -41,9 +41,9 @@ amcl:
     #Cuántos haces espaciados uniformemente en cada exploración se utilizarán al actualizar el filtro.
     max_beams: 50
     #Cantidad de particulas del filtro de particulas max
-    max_particles: 4000
+    max_particles: 2000
     #Cantidad de particulas del filtro de particulas min
-    min_particles: 100
+    min_particles: 400
     # Porcentaje del error en cada resampling del filtro de partículas
     pf_err: 0.2
     #
@@ -66,9 +66,11 @@ amcl:
     #Tiempo con el que se posfecha la transformación que se publica, para indicar que esta transformación es válida en el futuro.
     transform_tolerance: 1.0
     #Ángulo mínimo que se debe recorrer para hacer una actualización de filtro
-    update_min_a: 0.2
+    update_min_a: 0.1
     #Distancia mínima que se debe recorrer para hacer una actualización de filtro
-    update_min_d: 0.25
+    update_min_d: 0.10
+    #update_min_a: -1.0
+    #update_min_d: -1.0
     #~~~~~~~~~~~~~~~~Parámetros para el modelado del laser~~~~~~~~~
     #La probabilidad de que la medición del sensor sea correcta
     z_hit: 0.7
