@@ -11,7 +11,7 @@ planner_server:
       # Tipo de plugin
       plugin: "nav2_navfn_planner/NavfnPlanner"
       # Tolerancia de la meta
-      tolerance: 0.5
+      tolerance: 0.15
       # usar el algoritmo A*
       use_astar: false
       # Permitir que la ruta se genera en espacios no explorados del map
