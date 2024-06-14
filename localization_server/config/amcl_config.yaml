@@ -1,6 +1,6 @@
 amcl:
   ros__parameters:
-    use_sim_time: True
+    use_sim_time: False
     # Modela el error en la rotacion de la odometría desde la rotación
     alpha1: 0.1
     # Modela el error en la rotacion de la odometría desde la traslación

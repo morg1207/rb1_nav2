@@ -15,7 +15,7 @@ def generate_launch_description():
     use_sim_time_arg = DeclareLaunchArgument('use_sim_time', default_value='true', description='Parameter to use simulation time or real robot time')
 
     resolution_map_value = LaunchConfiguration('resolution_map')
-    resolution_map_arg = DeclareLaunchArgument('resolution_map', default_value='0.25', description='Map resolution')
+    resolution_map_arg = DeclareLaunchArgument('resolution_map', default_value='0.05', description='Map resolution')
 
     return LaunchDescription([
         # Argumentos
@@ -28,7 +28,7 @@ def generate_launch_description():
             executable='cartographer_node', 
             name='cartographer_node',
             output='screen',
-            parameters=[{'use_sim_time': True}],
+            parameters=[{'use_sim_time': False}],
             arguments=[
                 '-configuration_directory', cartographer_config_dir,
                 '-configuration_basename', configuration_basename
@@ -41,7 +41,7 @@ def generate_launch_description():
             executable='cartographer_occupancy_grid_node',
             name='occupancy_grid_node',
             output='screen',
-            parameters=[{'use_sim_time': True}],
+            parameters=[{'use_sim_time': False}],
             arguments=[
                 '-resolution', resolution_map_value,
                 '-publish_period_sec', '1.0'
