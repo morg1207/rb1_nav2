@@ -24,7 +24,7 @@ def generate_launch_description():
     map_file = LaunchConfiguration('map_file')
     arg_map_file = DeclareLaunchArgument(
         'map_file',
-        default_value='warehouse_map_sim.yaml',
+        default_value='warehouse_map_real.yaml',
         description='Path to the map select'
     )
 
@@ -58,7 +58,7 @@ def generate_launch_description():
             executable='map_server',
             name='map_server',
             output='screen',
-            parameters=[{'use_sim_time': True}, 
+            parameters=[{'use_sim_time': False}, 
                         {'yaml_filename': map_file_path}]
         ),
 

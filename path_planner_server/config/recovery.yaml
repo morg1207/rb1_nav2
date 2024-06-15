@@ -18,7 +18,7 @@ recoveries_server:
     global_frame: map
     robot_base_frame: robot_base_footprint
     transform_timeout: 0.1
-    use_sim_time: true
+    use_sim_time: false
     # Tiempo de anticipación de las colisiones (s).
     simulate_ahead_time: 2.0
     max_rotational_vel: 0.5

@@ -22,7 +22,7 @@ amcl:
     # si esto sucede beam skip distance será activado
     beam_skip_threshold: 0.3
     #hacer un saldo de lecturas
-    do_beamskip: false
+    do_beamskip: true
     # Frame base a apartir del cual se calculará la posición
     base_frame_id: "robot_base_footprint"
     # Frame global a partir se dará la localización
@@ -41,9 +41,9 @@ amcl:
     #Cuántos haces espaciados uniformemente en cada exploración se utilizarán al actualizar el filtro.
     max_beams: 50
     #Cantidad de particulas del filtro de particulas max
-    max_particles: 2000
+    max_particles: 3000
     #Cantidad de particulas del filtro de particulas min
-    min_particles: 400
+    min_particles: 500
     # Porcentaje del error en cada resampling del filtro de partículas
     pf_err: 0.2
     #
@@ -66,9 +66,9 @@ amcl:
     #Tiempo con el que se posfecha la transformación que se publica, para indicar que esta transformación es válida en el futuro.
     transform_tolerance: 1.0
     #Ángulo mínimo que se debe recorrer para hacer una actualización de filtro
-    update_min_a: 0.1
+    update_min_a: 0.2
     #Distancia mínima que se debe recorrer para hacer una actualización de filtro
-    update_min_d: 0.10
+    update_min_d: 0.20
     #update_min_a: -1.0
     #update_min_d: -1.0
     #~~~~~~~~~~~~~~~~Parámetros para el modelado del laser~~~~~~~~~
