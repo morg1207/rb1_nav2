@@ -6,11 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /TF1
         - /TF1/Frames1
         - /Map1/Topic1
         - /PoseWithCovariance1/Topic1
         - /ParticleCloud1/Topic1
-        - /LaserScan1
         - /LaserScan1/Topic1
         - /Path1/Topic1
         - /Polygon1
@@ -60,6 +60,8 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        back_frame:
+          Value: true
         cart_frame:
           Value: true
         charge_station:
@@ -73,11 +75,11 @@ Visualization Manager:
         robot_base_link:
           Value: false
         robot_cart_laser:
-          Value: true
+          Value: false
         robot_cart_laser_noisy:
-          Value: true
+          Value: false
         robot_cart_laser_noisy_0:
-          Value: true
+          Value: false
         robot_docking_station_laser:
           Value: true
         robot_docking_station_laser_noisy:
@@ -132,6 +134,8 @@ Visualization Manager:
       Tree:
         map:
           robot_odom:
+            back_frame:
+              {}
             cart_frame:
               target_goal_frame:
                 {}
@@ -450,25 +454,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 5.965783596038818
+      Distance: 3.327373743057251
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.395544409751892
-        Y: -1.1166272163391113
-        Z: -0.27396026253700256
+        X: 0.8741307258605957
+        Y: -0.6998357176780701
+        Z: -0.3955402672290802
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8097962737083435
+      Pitch: 1.1297961473464966
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.2253987342119217
+      Yaw: 1.115398645401001
     Saved: ~
 Window Geometry:
   Displays:
