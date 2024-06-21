@@ -9,8 +9,8 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     package_path_planner = 'path_planner_server'
     package_localization = 'localization_server'
-    #rviz_file = os.path.join(get_package_share_directory(package_path_planner),'rviz','pathplanning.rviz')
-    rviz_file = os.path.join(get_package_share_directory('filter_map_laser'),'config','config.rviz')
+    rviz_file = os.path.join(get_package_share_directory(package_path_planner),'rviz','pathplanning.rviz')
+    #rviz_file = os.path.join(get_package_share_directory('filter_map_laser'),'config','config.rviz')
     
     #~~~~~~~~~~~~~~~~~~~~~~~~path config files~~~~~~~~~~~~~~~~~~~~~~~~~~~
     amcl_file = os.path.join(get_package_share_directory(package_localization),'config','amcl_config.yaml')
@@ -154,13 +154,12 @@ def generate_launch_description():
                                         'behavior_server',
                                         'bt_navigator']}]
         ),
-
         #~~~~~~~~~~~~~~~~~~rviz2~~~~~~~~~~~~~~~~~~~~~~~~~~      
         Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',
             output='screen',
-            arguments=['-d', '/home/user/ros_ws/src/filter_map_laser/config/config.rviz']
-        )
+            arguments=['-d', rviz_file],
+        ),
     ])
