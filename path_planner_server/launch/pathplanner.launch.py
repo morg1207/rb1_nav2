@@ -61,32 +61,16 @@ def generate_launch_description():
         ),
 
         Node(
-            package='nav2_map_server',
-            executable='map_server',
-            name='filter_mask_server',
-            output='screen',
-            emulate_tty=True,
-            parameters=[filters_yaml]),
-
-        Node(
-            package='nav2_map_server',
-            executable='costmap_filter_info_server',
-            name='costmap_filter_info_server',
-            output='screen',
-            emulate_tty=True,
-            parameters=[filters_yaml]),
-        Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',
             name='lifecycle_manager_pathplanner',
             output='screen',
             parameters=[{'autostart': True},
+                        {'use_sim_time': True},
                         {'node_names': ['planner_server',
-                                        #'controller_server',
-                                        #'behavior_server',
-                                        #'bt_navigator',
-                                        #'filter_mask_server',
-                                        #'costmap_filter_info_server',]}]),
+                                        'controller_server',
+                                        'behavior_server',
+                                        'bt_navigator'
                                         ]}]),
 
         #~~~~~~~~~~~~~~~~~~rviz2~~~~~~~~~~~~~~~~~~~~~~~~~~      
