@@ -12,7 +12,6 @@ Panels:
         - /ParticleCloud1/Topic1
         - /LaserScan1/Topic1
         - /Path1/Topic1
-        - /LaserScan2
       Splitter Ratio: 0.5
     Tree Height: 470
   - Class: rviz_common/Selection
@@ -59,23 +58,19 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        back_frame:
-          Value: true
-        cart_frame:
+        charge_station:
           Value: true
         map:
+          Value: true
+        robot_ar_marker_1:
+          Value: true
+        robot_ar_marker_noisy_1:
           Value: true
         robot_base_docking_contact_link:
           Value: false
         robot_base_footprint:
           Value: true
         robot_base_link:
-          Value: false
-        robot_cart_laser:
-          Value: false
-        robot_cart_laser_noisy:
-          Value: false
-        robot_cart_laser_noisy_0:
           Value: false
         robot_docking_station_laser:
           Value: true
@@ -119,12 +114,6 @@ Visualization Manager:
           Value: false
         robot_top_cover_link:
           Value: false
-        target_goal_frame:
-          Value: true
-        target_goal_nav_frame:
-          Value: true
-        target_shelf_frame:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -133,17 +122,14 @@ Visualization Manager:
       Tree:
         map:
           robot_odom:
-            back_frame:
+            robot_ar_marker_1:
               {}
-            cart_frame:
-              target_goal_frame:
-                {}
-              target_goal_nav_frame:
-                {}
-              target_shelf_frame:
-                {}
+            robot_ar_marker_noisy_1:
+              {}
             robot_base_footprint:
               robot_base_link:
+                charge_station:
+                  {}
                 robot_elevator_base_link:
                   robot_elevator_platform_link:
                     {}
@@ -176,12 +162,6 @@ Visualization Manager:
                 {}
               robot_top_cover_link:
                 {}
-            robot_cart_laser:
-              {}
-            robot_cart_laser_noisy:
-              {}
-            robot_cart_laser_noisy_0:
-              {}
             robot_docking_station_laser:
               {}
             robot_docking_station_laser_noisy:
@@ -437,9 +417,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 3186
+      Max Intensity: 1255
       Min Color: 0; 0; 0
-      Min Intensity: 145
+      Min Intensity: 253
       Name: LaserScan
       Position Transformer: XYZ
       Selectable: true
@@ -455,6 +435,26 @@ Visualization Manager:
         Value: /scan_filtered
       Use Fixed Frame: true
       Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz_default_plugins/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /poses_nav
       Value: true
   Enabled: true
   Global Options:
@@ -502,7 +502,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 8.81027603149414
+      Distance: 5.917499542236328
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
