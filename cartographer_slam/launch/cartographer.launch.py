@@ -6,54 +6,74 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
+
+    #~~~~~~~~~~~~~~~~~~ PACKAGES ~~~~~~~~~~~~~~~
+
     package_name = 'cartographer_slam'
-    cartographer_config_dir = os.path.join(get_package_share_directory(package_name), 'config')
+
+    #~~~~~~~~~~~~~~~~~~~~~~~~ PATHS ~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+
     configuration_basename = 'cartographer.lua'
+    cartographer_config_dir = os.path.join(get_package_share_directory(package_name), 'config')
+    
     rviz_file = os.path.join(get_package_share_directory(package_name), 'rviz', 'rviz_config.rviz')
 
-    use_sim_time_value = LaunchConfiguration('use_sim_time')
-    use_sim_time_arg = DeclareLaunchArgument('use_sim_time', default_value='true', description='Parameter to use simulation time or real robot time')
+    #~~~~~~~~~~~~~~~~~~~~~~~~ ARGUMENTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 
-    resolution_map_value = LaunchConfiguration('resolution_map')
-    resolution_map_arg = DeclareLaunchArgument('resolution_map', default_value='0.05', description='Map resolution')
+    arg_use_sim_time = DeclareLaunchArgument(
+        'use_sim_time', 
+        default_value='true', 
+        description='Parameter to use simulation time or real robot time')
+    
+    arg_resolution_map = DeclareLaunchArgument(
+        'resolution_map', 
+        default_value='0.05', 
+        description='Map resolution')
 
-    return LaunchDescription([
-        # Argumentos
-        use_sim_time_arg,
-        resolution_map_arg,
+    config_use_sim_time = LaunchConfiguration('use_sim_time')
+    config_resolution_map = LaunchConfiguration('resolution_map')
 
-        # SLAM Algorithm
-        Node(
+    #~~~~~~~~~~~~~~~~~~~~~~~~ NODES ~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+
+    cartographer_node =  Node(
             package='cartographer_ros', 
             executable='cartographer_node', 
             name='cartographer_node',
             output='screen',
-            parameters=[{'use_sim_time': False}],
+            parameters=[{'use_sim_time': config_use_sim_time}],
             arguments=[
                 '-configuration_directory', cartographer_config_dir,
                 '-configuration_basename', configuration_basename
             ]
-        ),
+    )
 
-        # Publish Map
-        Node(
+    cartographer_occupancy_grid_node = Node(
             package='cartographer_ros',
             executable='cartographer_occupancy_grid_node',
             name='occupancy_grid_node',
             output='screen',
-            parameters=[{'use_sim_time': False}],
+            parameters=[{'use_sim_time': config_use_sim_time}],
             arguments=[
-                '-resolution', resolution_map_value,
+                '-resolution', config_resolution_map,
                 '-publish_period_sec', '1.0'
             ]
-        ),
-
-        # RViz
-        Node(
+    )
+    
+    rviz =  Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',
             output='screen',
             arguments=['-d', rviz_file]
-        ),
+    )
+
+    return LaunchDescription([
+
+        arg_use_sim_time,
+        arg_resolution_map,
+
+        cartographer_node,
+        cartographer_occupancy_grid_node,
+        rviz
+
     ])

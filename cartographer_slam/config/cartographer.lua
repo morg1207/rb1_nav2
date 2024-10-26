@@ -13,7 +13,7 @@ options = {
   --Frame de odometría corregido generado por SLAM, esta odometía es más precisa
   --tiene un nivel de actualización mucho más rápida, solo se proveerá si 
   -- "provide_odom_frame" es igual a true
-  odom_frame = "odom",
+  odom_frame = "robot_odom",
   provide_odom_frame = false,
   --De todas las transformaciones serán filtrados los componentes 3d
   --rotaciones en x y z y altura en z
