@@ -1,8 +1,16 @@
 # Navigation RB1
 
+## Install
+### Install dependencies
+
+```bash
+rosdep init
+rosdep update --rosdistro $ROS_DISTRO
+rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+```
+
 
 ## Sim Robot
-
 ### Mapping
 
 Terminal 1
