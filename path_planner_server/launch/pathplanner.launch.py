@@ -16,12 +16,19 @@ def generate_launch_description():
     #~~~~~~~~~~~~~~~~~~~~~~~~ PATHS ~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 
     default_value_bt_xml_file =  PathJoinSubstitution([get_package_share_directory(package_name),'config', 'navigate_w_replanning_and_recovery.xml'])
+    default_value_bt_poses_xml_file =  PathJoinSubstitution([get_package_share_directory(package_name),'config', 'navigate_w_replanning_and_recovery_poses.xml'])
     
     #~~~~~~~~~~~~~~~~~~~~~~~~ ARGUMENTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 
     arg_bt_xml_file = DeclareLaunchArgument(
         'bt_xml_file',
         default_value= default_value_bt_xml_file,
+        description='Path to the behavior tree XML file for NavigateToPose'
+    )
+
+    arg_bt_poses_xml_file = DeclareLaunchArgument(
+        'bt_poses_xml_file',
+        default_value= default_value_bt_poses_xml_file,
         description='Path to the behavior tree XML file for NavigateToPose'
     )
 
@@ -40,6 +47,7 @@ def generate_launch_description():
     )
 
     config_bt_xml_file = LaunchConfiguration('bt_xml_file')
+    config_bt_poses_xml_file = LaunchConfiguration('bt_poses_xml_file')
     config_type_simulation = LaunchConfiguration('type_simulation')
     config_use_sim_time = LaunchConfiguration('use_sim_time')
     
@@ -60,6 +68,7 @@ def generate_launch_description():
             executable='controller_server',
             name='controller_server',
             output='screen',
+            emulate_tty=True,
             parameters=[controller_yaml]
     )
     mav2_planner = Node(
@@ -67,6 +76,7 @@ def generate_launch_description():
             executable='planner_server',
             name='planner_server',
             output='screen',
+            emulate_tty=True,
             parameters=[planner_yaml]
     )
             
@@ -74,6 +84,7 @@ def generate_launch_description():
             package='nav2_behaviors',
             executable='behavior_server',
             name='behavior_server',
+            emulate_tty=True,
             parameters=[recovery_yaml],
             output='screen'
     )
@@ -83,8 +94,10 @@ def generate_launch_description():
             executable='bt_navigator',
             name='bt_navigator',
             output='screen',
+            emulate_tty=True,
             parameters=[bt_navigator_yaml, {
-                'default_nav_to_pose_bt_xml': config_bt_xml_file
+                'default_nav_to_pose_bt_xml': config_bt_xml_file,
+                'default_nav_through_poses_bt_xml': config_bt_poses_xml_file
             }]
     )
 
@@ -93,6 +106,7 @@ def generate_launch_description():
             executable='lifecycle_manager',
             name='lifecycle_manager_pathplanner',
             output='screen',
+            emulate_tty=True,
             parameters=[{'autostart': True},
                         {'use_sim_time': config_use_sim_time},
                         {'node_names': ['planner_server',
@@ -107,12 +121,14 @@ def generate_launch_description():
             executable='rviz2',
             name='rviz2',
             output='screen',
+            emulate_tty=True,
             arguments=['-d', rviz_file],
     )
 
     return LaunchDescription([ 
         arg_type_simulation,
         arg_bt_xml_file,
+        arg_bt_poses_xml_file,
         arg_use_sim_time,
 
         nav2_controller,

@@ -11,7 +11,7 @@ def generate_launch_description():
 
     localization = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([
-                    FindPackageShare("localization_server"), '/launch', '/localization_nrviz.launch.py'])
+                    FindPackageShare("localization_server"), '/launch', '/localization.launch.py'])
             )
     path_planner_server = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([

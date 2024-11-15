@@ -26,7 +26,7 @@ def generate_launch_description():
 
     arg_map_file = DeclareLaunchArgument(
         'map_file',
-        choices= ['warehouse_map_sim.yaml','warehouse_map_real.yaml'],
+        choices= ['warehouse_map_sim.yaml','warehouse_map_real.yaml','warehouse_map_sim_edit.yaml'],
         default_value='warehouse_map_sim.yaml',
         description='Path to the map select'
     )
@@ -61,7 +61,7 @@ def generate_launch_description():
                     
     path_planner_server = IncludeLaunchDescription(PythonLaunchDescriptionSource(launch_path_planner_server),
                     launch_arguments=[['use_sim_time', config_use_sim_time],
-                                      ['type_simualtion', config_type_simulation]]                                                  
+                                      ['type_simulation', config_type_simulation]]                                                  
                                                    
     )
 

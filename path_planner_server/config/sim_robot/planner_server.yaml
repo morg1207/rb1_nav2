@@ -70,7 +70,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 2.5
-        inflation_radius: 0.4
+        inflation_radius: 0.7
       #~~~~~~~~~~~~~~~~~~~Obstacle layer config~~~~~~~~~~~~~~~~~~~+
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"

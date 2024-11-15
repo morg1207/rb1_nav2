@@ -4,7 +4,7 @@ from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, ExecuteProcess
 
 from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration, PythonExpression, FindExecutable, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, FindExecutable, PathJoinSubstitution
 
 from launch.conditions import IfCondition, UnlessCondition
 
@@ -25,7 +25,7 @@ def generate_launch_description():
 
     arg_map_file = DeclareLaunchArgument(
         'map_file',
-        choices= ['warehouse_map_sim.yaml','warehouse_map_real.yaml'],
+        choices= ['warehouse_map_sim.yaml','warehouse_map_real.yaml','warehouse_map_sim_edit.yaml'],
         default_value='warehouse_map_sim.yaml',
         description='Path to the map select'
     )
@@ -56,6 +56,7 @@ def generate_launch_description():
             executable='map_server',
             name='map_server',
             output='screen',
+            emulate_tty=True,
             parameters=[{'use_sim_time': config_use_sim_time},
                 {'yaml_filename': map_file_path}
                 ]
@@ -67,6 +68,7 @@ def generate_launch_description():
                 executable='amcl',
                 name='amcl',
                 output='screen',
+                emulate_tty=True,
                 parameters=[amcl_file],
                 condition=IfCondition(config_use_sim_time)
     )
@@ -75,6 +77,7 @@ def generate_launch_description():
                 executable='amcl',
                 name='amcl',
                 output='screen',
+                emulate_tty=True,
                 parameters=[ amcl_file_real],
                 condition=UnlessCondition(config_use_sim_time)
     )
@@ -84,6 +87,7 @@ def generate_launch_description():
                 executable='lifecycle_manager',
                 name='lifecycle_manager_mapper',
                 output='screen',
+                emulate_tty=True,
                 parameters=[{'use_sim_time': config_use_sim_time},
                             {'autostart': True},
                             {'node_names': ['map_server','amcl']}]
@@ -103,6 +107,7 @@ def generate_launch_description():
                 executable='rviz2',
                 name='rviz2',
                 output='screen',
+                emulate_tty=True,
                 arguments=['-d', rviz_file],
                 condition=IfCondition(config_rviz)
     )

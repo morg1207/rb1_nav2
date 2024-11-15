@@ -9,14 +9,14 @@ controller_server:
     # Los valores de odometría por debajo de este umbral (en rad/s) se establecerán en 0,0.
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
-    min_theta_velocity_threshold: 0.001
+    min_theta_velocity_threshold: 0.006
     #Duración máxima en segundos que el plugin pueda fallar
     failure_tolerance: 0.3
     #~~~~~~~~~~~~~Nombres de plugins a cargar~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # nombre del plugin para conecer el progreso del robot
     progress_checker_plugin: "progress_checker"
     # nombre del plugin para conocer el resultado del goal
-    goal_checker_plugin: "general_goal_checker"
+    goal_checker_plugins: ["goal_checker"] # goal_checker_plugin: "goal_checker" For Galactic and older
     # nombre del plugin para el controlador
     controller_plugins: ["FollowPath"]
     # Tópico donde se publicaran las velocidades
@@ -30,13 +30,13 @@ controller_server:
       movement_time_allowance: 10.0
 
     # Goal checker parameters
-    general_goal_checker:
-      stateful: True
+    goal_checker:
+      stateful: False
       plugin: "nav2_controller::SimpleGoalChecker"
       # Tolerancia para cumplir los criterios de finalización del objetivo (m).
       xy_goal_tolerance: 0.25
       # Tolerancia para cumplir los criterios de cumplimiento de objetivos (rad).
-      yaw_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.1
       #trans_stopped_velocity: 0.25   # m/s
       #rot_stopped_velocity: 0.25    # rad/s
     # DWB parameters
@@ -63,7 +63,7 @@ controller_server:
       max_vel_theta: 1.0
       min_speed_xy: 0.0
       max_speed_xy: 0.25
-      min_speed_theta: 0.0
+      min_speed_theta: 0.14
       #------------Aceleraciones--------------
       acc_lim_x: 2.5
       acc_lim_y: 0.0
@@ -130,7 +130,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.5
+        inflation_radius: 0.7
       #keepout_filter:
       #  plugin: "nav2_costmap_2d::KeepoutFilter"
       #  enabled: True

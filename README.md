@@ -33,7 +33,7 @@ ros2 launch path_planner_server path_planner_server.launch.py type_simulation:=s
 
 ### Launch entire navigation
 ```bash
-ros2 launch path_planner_server navigation.launch.py type_simulation:=sim_robot use_sim_time:=True map_file:=warehouse_map_sim.yaml 
+ros2 launch path_planner_server navigation.launch.py type_simulation:=sim_robot use_sim_time:=True map_file:=warehouse_map_sim_edit.yaml 
 ```
 
 ## Real Robot
